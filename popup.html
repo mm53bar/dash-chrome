@@ -8,11 +8,11 @@
       var STRONG = 'ABCDEFGHJKLMNPQRSTUVWabcdefghijkmnopqrstuvw0123456789+/-_*()[]{}';
       var WEAK =  'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       var LENGTH = 12;
-  
+
       function hash() {
         var password = document.getElementById("password").value;
         var domain = document.getElementById("domain").value;
-        
+
         var key = encrypt(password);
         var hash = encrypt(key + domain);
 
@@ -21,49 +21,26 @@
 
         document.getElementById("hash").innerHTML = hash;
       }
-      
+
       function encrypt(data) {
         return hex_sha1(data);
       }
 
-      function getDomain(url) {
-        var current_URL = '';
-        if (url.indexOf('?') > -1) {
-        	current_URL = unescape(url.substr(url.indexOf('?')+1));
-        }
-
-        if (current_URL == 'localhost')
-          return current_URL;
-        if (IsIp(current_URL)) 
-          return current_URL;
-        if (current_URL == '')
-          return current_URL;
-
-        var split = current_URL.split('.'); //location.hostname.split('.');
-        var domain = [split.pop()];
-        var item;
-
-        while (item = split.pop()) {
-          domain.unshift(item);
-          if (item.length > 2) {
-            break;
-          }
-        }
-        return domain.join('.');
+      function getHostname(url) {
+        var l = document.createElement("a");
+        l.href = url;
+        document.getElementById("domain").value = l.hostname;
       }
 
-      function IsIp(ip) {
-        var regexp = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/
-        return regexp.test(ip);
-      }
-      
       chrome.tabs.getSelected(null, function(tab) {
-          document.getElementById("domain").value = tab.url;
-          hash();
+        getHostname(tab.url);
       });
+      
+      function onLoad() { }
+      function onUnload() { }
     </script>
   </head>
-  <body>
+  <body onload="onLoad()" onunload="onUnload()>
     <form action="#" onsubmit="hash(); return false" method="get">
       Master password: <input class="dynamic" type="password" id="password" />
       Domain: <input class="dynamic" type="text" id="domain" />
