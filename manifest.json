@@ -2,6 +2,12 @@
 "name": "Dash",
 "version": "0.1.0",
 "description": "Generates a strong password that is simple to recreate so there is no need to ever store your passwords.",
-"browser_action": { "popup": "popup.html" },
+"icons": { "16": "images/icon16.png",
+           "48": "images/icon48.png",
+          "128": "images/icon128.png" },
+"browser_action": {
+  "default_icon": "images/icon48.png",
+  "default_title": "Dash", 
+  "popup": "popup.html" },
 "permissions": [ ]
 }
