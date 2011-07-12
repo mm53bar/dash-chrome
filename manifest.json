@@ -9,5 +9,7 @@
   "default_icon": "images/icon48.png",
   "default_title": "Dash", 
   "popup": "popup.html" },
-"permissions": [ ]
+"permissions": [
+  "tabs"
+]
 }

@@ -56,6 +56,11 @@
         var regexp = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/
         return regexp.test(ip);
       }
+      
+      chrome.tabs.getSelected(null, function(tab) {
+          document.getElementById("domain").value = tab.url;
+          hash();
+      });
     </script>
   </head>
   <body>
