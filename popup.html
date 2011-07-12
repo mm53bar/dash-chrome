@@ -36,8 +36,15 @@
         getHostname(tab.url);
       });
       
-      function onLoad() { }
-      function onUnload() { }
+      function onLoad() { 
+        if(localStorage["password"] != null) {
+          document.getElementById("password").value = localStorage["password"];
+        }
+      }
+      
+      function onUnload() { 
+        localStorage["password"] = document.getElementById("password").value;
+      }
     </script>
   </head>
   <body class="popup_body" onload="onLoad()" onunload="onUnload()">
