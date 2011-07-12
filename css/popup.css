@@ -1,0 +1,20 @@
+.popup_body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #333;
+}
+#container {
+  padding:10px 10px 20px;
+  background:red;
+  background:-webkit-gradient(linear, right bottom, right top, 
+     from(#ededed), to(#fff), 
+     color-stop(0.4, #eee), color-stop(0.2, #f0f0f0));
+  -webkit-border-radius: 5px;
+  border:1px solid #ccc;
+  position:relative;
+
+}
+
+input {
+	width:10em;
+}
