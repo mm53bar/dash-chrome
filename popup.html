@@ -2,7 +2,7 @@
   <head>
     <title>Dash</title>
     <link rel="stylesheet" href="css/popup.css" type="text/css" charset="utf-8" />
-    <script src="js/sha1.js" type="text/javascript"></script>
+    <script src="js/jsSha2/sha256.js" type="text/javascript"></script>
     <script src="js/base64.js" type="text/javascript"></script>
     <script type="text/javascript">
       var STRONG = 'ABCDEFGHJKLMNPQRSTUVWabcdefghijkmnopqrstuvw0123456789+/-_*()[]{}';
@@ -23,7 +23,7 @@
       }
 
       function encrypt(data) {
-        return hex_sha1(data);
+        return hex_sha256(data);
       }
 
       function getHostname(url) {
