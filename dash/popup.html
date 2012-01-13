@@ -2,54 +2,14 @@
   <head>
     <title>Dash</title>
     <link rel="stylesheet" href="css/popup.css" type="text/css" charset="utf-8" />
-    <script src="js/jsSha2/sha256.js" type="text/javascript"></script>
-    <script src="js/base64.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      var STRONG = 'ABCDEFGHJKLMNPQRSTUVWabcdefghijkmnopqrstuvw0123456789+/-_*()[]{}';
-      var WEAK =  'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      var LENGTH = 12;
-
-      function hash() {
-        var password = document.getElementById("password").value;
-        var domain = document.getElementById("domain").value;
-
-        var key = encrypt(password);
-        var hash = encrypt(key + domain);
-
-        hash = base64_encode(hash, STRONG);
-        hash = hash.substring(0, LENGTH);
-
-        document.getElementById("hash").innerHTML = hash;
-      }
-
-      function encrypt(data) {
-        return hex_sha256(data);
-      }
-
-      function getHostname(url) {
-        var l = document.createElement("a");
-        l.href = url;
-        document.getElementById("domain").value = l.hostname;
-      }
-
-      chrome.tabs.getSelected(null, function(tab) {
-        getHostname(tab.url);
-      });
-      
-      function onLoad() { 
-        if(localStorage["password"] != null) {
-          document.getElementById("password").value = localStorage["password"];
-        }
-      }
-      
-      function onUnload() { 
-        localStorage["password"] = document.getElementById("password").value;
-      }
-    </script>
+    <script src="vendor/zepto.min.js" type="text/javascript"></script>
+    <script src="vendor/sha256.js" type="text/javascript"></script>
+    <script src="vendor/base64.js" type="text/javascript"></script>
+    <script src="build/dash.js" type="text/javascript"></script>
   </head>
-  <body class="popup_body" onload="onLoad()" onunload="onUnload()">
+  <body class="popup_body">
     <div id="container">
-      <form action="#" onsubmit="hash(); return false" method="get">
+      <form id="dash_form" action="#">
         Master password: <input class="dynamic" type="password" id="password" />
         Domain: <input class="dynamic" type="text" id="domain" />
         <input type="submit" value="Go"/>
